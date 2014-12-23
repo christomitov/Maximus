@@ -3,7 +3,8 @@
 angular.module('maximalistApp')
   .config(function($stateProvider) {
     $stateProvider
-      .state('invoices', {
+      .state('main.invoices', {
+        url: '/invoices',
         templateUrl: 'app/invoices/invoicesIndex.html',
         controller: 'MainCtrl'
       });
