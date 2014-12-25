@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('maximalistApp')
-  .controller('InvoicesCtrl', function($scope, Modal) {
+  .controller('InvoicesCtrl', function($scope, Modal, Item) {
     $scope.skuNumbers = [{
       sku: '11111',
       name: 'something'
@@ -13,16 +13,19 @@ angular.module('maximalistApp')
     $scope.selected = 'hellooo';
 
     $scope.skuSelected = function(selected) {
-
-      var test = Modal.confirm.save(callback, '<p>hello</p>', $scope);
-      //var test = Modal.confirm.delete(callback, '<p>hello</p>');
-      test();
-
-      //window.alert('You have selected ' + selected.title);
+      // Fetch the item from the database via SKU
+      var item = Item.getItem(selected.title);
+      console.log(item);
+      
+      // Load the modal with this item
+      var saveItemModal = Modal.confirm.save(saveItemToInvoice, null, item);
+      // Render the modal
+      saveItemModal();
+      // Clear the SKU input field
       $scope.$broadcast('angucomplete-alt:clearInput', 'sku');
     }
 
-    var callback = function() {
+    var saveItemToInvoice = function() {
       console.log("HERE!");
     }
   });

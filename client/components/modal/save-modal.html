@@ -10,58 +10,58 @@
         <div class="input-group">
           <div class="input-group-addon">Plan #</div>
           <!-- focus the first input for usability purposes -->
-          <input id="plan" class="form-control" value="{{item.plan}}" placeholder="Plan #" autofocus />
+          <input id="plan" class="form-control" value="{{plan}}" placeholder="Plan #" autofocus />
         </div>
       </div>
       <div class="col-lg-6">
         <div class="input-group">
           <div class="input-group-addon">Arb #</div>
-          <input id="arb" class="form-control" value="{{item.arb}}" placeholder="Arb #" />
+          <input id="arb" class="form-control" value="{{arb}}" placeholder="Arb #" />
         </div>
       </div>
     </div>
 
     <div id="unitInputs">
-      <div ng-if="cubicItem">
+      <div ng-if="unit == 'CUBIC'">
         <label>Enter cubic dimensions</label>
         <div class="input-group">
-          <input id="length" type="number" value="{{item.l}}" class="form-control" placeholder="Enter length">
+          <input id="length" type="number" value="{{length}}" class="form-control" placeholder="Enter length">
           <div class="input-group-addon">x</div>
-          <input id="width" type="number" value="{{item.w}}" class="form-control" placeholder="Enter width">
+          <input id="width" type="number" value="{{width}}" class="form-control" placeholder="Enter width">
           <div class="input-group-addon">x</div>
-          <input id="height" type="number" value="{{item.h}}" class="form-control" placeholder="Enter height">
+          <input id="height" type="number" value="{{height}}" class="form-control" placeholder="Enter height">
         </div>
       </div>
-      <div ng-if="squaredItem">
+      <div ng-if="unit == 'SQUARED'">
         <label>Enter cubic dimensions</label>
         <div class="input-group">
-          <input id="length" type="number" value="{{item.l}}" class="form-control" placeholder="Enter length">
+          <input id="length" type="number" value="{{length}}" class="form-control" placeholder="Enter length">
           <div class="input-group-addon">x</div>
-          <input id="width" type="number" value="{{item.w}}" class="form-control" placeholder="Enter width">
+          <input id="width" type="number" value="{{width}}" class="form-control" placeholder="Enter width">
         </div>
       </div>
-      <div ng-if="lengthItem">
+      <div ng-if="unit == 'METRE'">
         <label>Enter Length</label>
         <div class="input-group">
-          <input id="length" type="number" value="{{item.l}}" class="form-control" placeholder="Enter length">
+          <input id="length" type="number" value="{{l}}" class="form-control" placeholder="Enter length">
         </div>
       </div>
-      <div ng-if="quantityItem">
+      <div ng-if="unit == 'EACH'">
         <label>Enter Quantity</label>
         <div class="input-group">
-          <input id="quantity" value="{{item.quantity}}" class="form-control" placeholder="Enter Quantity">
+          <input id="quantity" value="{{quantity}}" class="form-control" placeholder="Enter Quantity">
         </div>
       </div>
-      <div ng-if="hourlyItem">
+      <div ng-if="unit == 'HOURLY'">
         <label>Enter Number of Hours</label>
         <div class="input-group">
-          <input id="hours" type="number" value="{{item.hours}}" class="form-control" placeholder="# of Hours">
+          <input id="hours" type="number" value="{{hours}}" class="form-control" placeholder="# of Hours">
         </div>
       </div>
-      <div ng-if="percentageItem">
+      <div ng-if="unit == 'PERCENT'">
         <label>Enter Percentage</label>
         <div class="input-group">
-          <input id="percentage" type="number" value="{{item.percentage}}" class="form-control" placeholder="Enter %">
+          <input id="percentage" type="number" value="{{percentage}}" class="form-control" placeholder="Enter %">
         </div>
       </div>
     </div>

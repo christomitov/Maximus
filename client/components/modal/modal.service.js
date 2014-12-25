@@ -32,7 +32,7 @@ angular.module('maximalistApp')
          * @param {Function} callback - callback, ran when save is confirmed
          * @return {Function}     - the function to open the modal (ex. myFodalFn)
          */
-        save: function(callback, html, scope) {
+        save: function(callback, html, item) {
           callback = callback || angular.noop;
 
           /**
@@ -65,10 +65,8 @@ angular.module('maximalistApp')
                 }]
               }
             };
-            
-            // console.log(modalScope);
-            // angular.extend(modalScope, scope);
-            // console.log(modalScope);
+
+            angular.extend(modalScope, item);
             saveModal = openModal(modalScope, null, 'components/modal/save-modal.html');
 
             saveModal.result.then(function(event) {
