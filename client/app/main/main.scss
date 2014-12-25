@@ -54,6 +54,12 @@ html {
 }
 /** end of fix **/
 
+#sku_value {
+  height: 46px;
+  border-top-right-radius: 0px;
+  border-top-left-radius:0px;
+}
+
 input.sku, .typeahead, .twitter-typeahead {
   width:100% !important;
 }

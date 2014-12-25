@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('maximalistApp')
-  .factory('Modal', function ($rootScope, $modal) {
+  .factory('Modal', function($rootScope, $modal) {
     /**
      * Opens a modal
      * @param  {Object} scope      - an object to be merged with modal's scope
      * @param  {String} modalClass - (optional) class(es) to be applied to the modal
      * @return {Object}            - the instance $modal.open() returns
      */
-    function openModal(scope, modalClass) {
+    function openModal(scope, modalClass, template) {
       var modalScope = $rootScope.$new();
       scope = scope || {};
       modalClass = modalClass || 'modal-default';
@@ -16,7 +16,7 @@ angular.module('maximalistApp')
       angular.extend(modalScope, scope);
 
       return $modal.open({
-        templateUrl: 'components/modal/modal.html',
+        templateUrl: template || 'components/modal/modal.html',
         windowClass: modalClass,
         scope: modalScope
       });
@@ -27,6 +27,55 @@ angular.module('maximalistApp')
 
       /* Confirmation modals */
       confirm: {
+        /**
+         * Create a function to open a save confirmation modal
+         * @param {Function} callback - callback, ran when save is confirmed
+         * @return {Function}     - the function to open the modal (ex. myFodalFn)
+         */
+        save: function(callback, html, scope) {
+          callback = callback || angular.noop;
+
+          /**
+           * Open a save confirmation modal
+           * @param {String} name  - name or info to show on modal
+           * @param {All}          - any additional args passed straight to save callback
+           */
+          return function() {
+            var args = Array.prototype.slice.call(arguments),
+              name = args.shift(),
+              saveModal;
+
+            var modalScope = {
+              modal: {
+                dismissable: true,
+                title: 'Add SKU',
+                html: html,
+                buttons: [{
+                  classes: 'btn-primary',
+                  text: 'Save',
+                  click: function(e) {
+                    saveModal.close(e);
+                  }
+                }, {
+                  classes: 'btn-default',
+                  text: 'Cancel',
+                  click: function(e) {
+                    saveModal.dismiss(e);
+                  }
+                }]
+              }
+            };
+            
+            // console.log(modalScope);
+            // angular.extend(modalScope, scope);
+            // console.log(modalScope);
+            saveModal = openModal(modalScope, null, 'components/modal/save-modal.html');
+
+            saveModal.result.then(function(event) {
+              callback.apply(event, args);
+            });
+          }
+        },
 
         /**
          * Create a function to open a delete confirmation modal (ex. ng-click='myModalFn(name, arg1, arg2...)')
@@ -43,8 +92,8 @@ angular.module('maximalistApp')
            */
           return function() {
             var args = Array.prototype.slice.call(arguments),
-                name = args.shift(),
-                deleteModal;
+              name = args.shift(),
+              deleteModal;
 
             deleteModal = openModal({
               modal: {

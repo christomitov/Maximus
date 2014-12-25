@@ -6,6 +6,11 @@ angular.module('maximalistApp')
       .state('main.invoices', {
         url: '/invoices',
         templateUrl: 'app/invoices/invoicesIndex.html',
-        controller: 'MainCtrl'
+        controller: 'InvoicesCtrl'
+      })
+      .state('main.createInvoice', {
+        url: '/invoices/new',
+        templateUrl: 'app/invoices/invoicesCreate.html',
+        controller: 'InvoicesCtrl'
       });
   });
