@@ -56,14 +56,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="sheetItemRow" id="_id">
-        <td>plan</td>
-        <td>arb</td>
-        <td class="sku">sku</td>
-        <td>title</td>
-        <td>unit</td>
-        <td>priceQty</td>
-        <td>comments</td>
+      <tr class="sheetItemRow" id="_id" ng-repeat="item in invoice">
+        <td>{{item.plan}}</td>
+        <td>{{item.arb}}</td>
+        <td class="sku">{{item.sku}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.unit}}</td>
+        <td>{{item.priceQty}}</td>
+        <td>{{item.comments}}</td>
         <td style="width:90px;">
           <a href="#" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
           <a href="#" id="edit" class="pull-right"><i class="fa fa-fw fa-pencil fa-2x"></i></a>

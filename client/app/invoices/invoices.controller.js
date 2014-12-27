@@ -2,7 +2,8 @@
 
 angular.module('maximalistApp')
   .controller('InvoicesCtrl', function($scope, Modal, Item) {
-    
+
+    // Item database for autocomplete
     $scope.skuNumbers = [{
       sku: '11111',
       name: 'something'
@@ -11,15 +12,25 @@ angular.module('maximalistApp')
       name: 'something else'
     }];
 
-    $scope.selected = 'hellooo';
+    // Current invoice state
+    $scope.invoice = [{
+      plan: 3,
+      arb: 1,
+      sku: 344443
+    }, {
+      plan: 4,
+      arb: 3,
+      sku: 112030
+    }];
 
+    // On SKU autocompleted and selected
     $scope.skuSelected = function(selected) {
       // Fetch the item from the database via SKU
-      var item = Item.getItem(selected.title);
-      console.log(item);
-
+      $scope.currentItem = {
+        item: Item.getItem(selected.title)
+      };
       // Load the modal with this item
-      var saveItemModal = Modal.confirm.save(saveItemToInvoice, null, item);
+      var saveItemModal = Modal.confirm.save(saveItemToInvoice, null, $scope.currentItem);
       // Render the modal
       saveItemModal();
       // Clear the SKU input field
@@ -27,6 +38,7 @@ angular.module('maximalistApp')
     }
 
     var saveItemToInvoice = function() {
-      console.log("HERE!");
+      console.error('HERE', $scope.currentItem.item);
+      $scope.invoice.push($scope.currentItem.item);
     }
   });

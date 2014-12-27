@@ -18,7 +18,9 @@ angular.module('maximalistApp')
         // Dummy object for now
         var item = {
           sku: sku,
-          unit: 'PERCENT'
+          unit: 'PERCENT',
+          arb: '',
+          plan: ''
         }
 
         return item;
