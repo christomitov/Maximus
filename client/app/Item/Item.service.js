@@ -21,7 +21,7 @@ angular.module('maximalistApp')
           unit: 'PERCENT',
           arb: '',
           plan: ''
-        }
+        };
 
         return item;
       }

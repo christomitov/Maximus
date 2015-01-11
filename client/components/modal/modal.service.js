@@ -42,7 +42,7 @@ angular.module('maximalistApp')
            */
           return function() {
             var args = Array.prototype.slice.call(arguments),
-              name = args.shift(),
+              //name = args.shift(),
               saveModal;
 
             var modalScope = {
@@ -73,7 +73,7 @@ angular.module('maximalistApp')
             saveModal.result.then(function(event) {
               callback.apply(event, args);
             });
-          }
+          };
         },
 
         /**

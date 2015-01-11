@@ -42,42 +42,44 @@
     <!--<input auto-complete ui-items="codes" ng-model="selected" ng-keypress="loadItemModal($event)" id="sku" type="text" class="form-control" placeholder="Lookup a SKU" autocomplete="off" />-->
   </div>
   <br/>
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Plan</th>
-        <th>Arb</th>
-        <th>Orig Sku</th>
-        <th>Desc. of Current SKU</th>
-        <th>UoM</th>
-        <th>Pln Qty</th>
-        <th>Comments to Vendor</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="sheetItemRow" id="_id" ng-repeat="item in invoice">
-        <td>{{item.plan}}</td>
-        <td>{{item.arb}}</td>
-        <td class="sku">{{item.sku}}</td>
-        <td>{{item.title}}</td>
-        <td>{{item.unit}}</td>
-        <td>{{item.priceQty}}</td>
-        <td>{{item.comments}}</td>
-        <td style="width:90px;">
-          <a href="#" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
-          <a href="#" id="edit" class="pull-right"><i class="fa fa-fw fa-pencil fa-2x"></i></a>
-        </td>
-      </tr>
+  <div id="invoice" ng-show="invoice.length > 0">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Arb</th>
+          <th>Orig Sku</th>
+          <th>Desc. of Current SKU</th>
+          <th>UoM</th>
+          <th>Pln Qty</th>
+          <th>Comments to Vendor</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sheetItemRow" id="_id" ng-repeat="item in invoice">
+          <td>{{item.plan}}</td>
+          <td>{{item.arb}}</td>
+          <td class="sku">{{item.sku}}</td>
+          <td>{{item.title}}</td>
+          <td>{{item.unit}}</td>
+          <td>{{item.priceQty}}</td>
+          <td>{{item.comments}}</td>
+          <td style="width:90px;">
+            <a href="#" ng-click="delete(item)" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
+            <a href="#" ng-click="edit(item)" id="edit" class="pull-right"><i class="fa fa-fw fa-pencil fa-2x"></i></a>
+          </td>
+        </tr>
 
-      <tr>
-        <td>TOTAL</td>
-        <td colspan="5" class="text-right">$sheetItems.total</td>
-      </tr>
-    </tbody>
-  </table>
-  <div id="saveCancelButtons">
-    <button class="btn btn-primary btn-lg">Save</button>
-    <button id="cancel" class="btn btn-danger btn-lg">Cancel</button>
+        <tr>
+          <td>TOTAL</td>
+          <td colspan="5" class="text-right">$sheetItems.total</td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="saveCancelButtons">
+      <button class="btn btn-primary btn-lg">Save</button>
+      <button id="cancel" class="btn btn-danger btn-lg">Cancel</button>
+    </div>
   </div>
 </div>
