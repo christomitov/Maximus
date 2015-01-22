@@ -10,6 +10,7 @@ angular.module('maximalistApp')
     // All invoices
     $scope.invoices = Invoice.query();
 
+    // Empty Invoice
     $scope.invoice = {
       items: []
     };
@@ -22,18 +23,19 @@ angular.module('maximalistApp')
     }
 
     // Item database for autocomplete
-    $scope.skuNumbers = [{
-      sku: '11111',
-      name: 'something'
-    }, {
-      sku: '22222',
-      name: 'something else'
-    }];
+    $scope.items = Item.query();
 
     // On SKU autocompleted and selected
-    $scope.skuSelected = function(selected) {
-      // Fetch the item from the database via SKU
-      $scope.currentItem.item = Item.getItem(selected.title);
+    $scope.itemSelected = function(selected) {
+
+      // TODO: Fetch the item from the database via SKU, this is slow.
+      $scope.items.forEach(function(item, index) {
+        if(item.sku === selected.originalObject.sku) {
+          $scope.currentItem.item = item;
+        }
+      });
+      //$scope.currentItem.item = Item.getItem(selected.title);
+      console.log('current item is...', $scope.currentItem);
       // Load the modal with this item
       var saveItemModal = Modal.confirm.save(saveItemToInvoice, null, $scope.currentItem);
       // Render the modal
@@ -47,17 +49,17 @@ angular.module('maximalistApp')
     };
 
 
-    $scope.edit = function(item) {
+    $scope.editItem = function(item) {
       $scope.currentItem.item = item;
       console.log('item to edit', item);
       var saveItemModal = Modal.confirm.save(null, null, $scope.currentItem);
       saveItemModal();
     };
 
-    $scope.delete = function(item) {
-      _.each($scope.invoice, function(invoiceItem, index) {
+    $scope.deleteItem = function(item) {
+      _.each($scope.invoice.items, function(invoiceItem, index) {
         if (invoiceItem.sku === item.sku) {
-          $scope.invoice.splice(index, 1);
+          $scope.invoice.items.splice(index, 1);
           return false;
         }
       });

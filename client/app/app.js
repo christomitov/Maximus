@@ -6,7 +6,8 @@ angular.module('maximalistApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'angucomplete-alt'
+  'angucomplete-alt',
+  'angularFileUpload'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider

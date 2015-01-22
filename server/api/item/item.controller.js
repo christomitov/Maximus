@@ -2,6 +2,61 @@
 
 var _ = require('lodash');
 var Item = require('./item.model');
+var fs = require('fs');
+
+var unitMap = {
+  'CU METRE' : 'CUBIC METRE',
+  'CU M' : 'CUBIC METRE',
+  'SQ M' : 'SQUARE METRE',
+  'SQ METRE' : 'SQUARE METRE',
+  'EA' : 'EACH',
+  'M' : 'METRE'
+}
+
+/* Function to check for dictionary item and return default if it
+* doesn't exist
+*/
+var getProperty = function(o, prop) {
+  if (o[prop] !== undefined) return o[prop];
+  else return prop;
+}
+
+exports.import = function(req, res) {
+
+  fs.readFile(req.files.file.path, function (err, data) {
+    if (err) throw err;
+
+    var lines = data.toString().split("\n");
+    lines.forEach(function(line) {
+      var fields = line.split("~");
+      if (fields.length > 1 && fields[0].length <= 8) {
+        if (typeof fields[4] != 'undefined') {
+          fields[4] = getProperty(unitMap, fields[4].replace(/[\.]/g, "").toUpperCase());
+        }
+        if (fields[5] != undefined) {
+          fields[5] = fields[5].replace(/[\$]/g, "").trim();
+        }
+        var item = {
+          sku: fields[0],
+          title: fields[1],
+          description: fields[2],
+          additionalInfo: fields[3],
+          unit: fields[4],
+          unitPrice: fields[5],
+          winterPrice: fields[6],
+          winterPremium: fields[7],
+          name: fields[0] + " " + fields[1]
+        }
+        console.log("creating item...", item);
+        Item.create(item, function(err, item) {
+
+        });
+      }
+    });
+
+  });
+  return res.send(200);
+};
 
 // Get list of items
 exports.index = function(req, res) {

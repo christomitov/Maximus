@@ -11,6 +11,7 @@ var compression = require('compression');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
+var multer = require('multer');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var config = require('./environment');
@@ -26,7 +27,13 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  
+  app.use(multer({
+    dest: './uploads/',
+    rename: function(fieldname, filename) {
+      return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+    }
+  }));
+
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
