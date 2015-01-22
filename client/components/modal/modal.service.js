@@ -14,7 +14,7 @@ angular.module('maximalistApp')
       modalClass = modalClass || 'modal-default';
 
       angular.extend(modalScope, scope);
-      console.log(modalScope);
+
       return $modal.open({
         templateUrl: template || 'components/modal/modal.html',
         windowClass: modalClass,
@@ -67,7 +67,6 @@ angular.module('maximalistApp')
             };
 
             angular.extend(modalScope, item);
-            console.log(modalScope);
             saveModal = openModal(modalScope, null, 'components/modal/save-modal.html');
 
             saveModal.result.then(function(event) {
@@ -93,7 +92,7 @@ angular.module('maximalistApp')
             var args = Array.prototype.slice.call(arguments),
               name = args.shift(),
               deleteModal;
-
+      
             deleteModal = openModal({
               modal: {
                 dismissable: true,

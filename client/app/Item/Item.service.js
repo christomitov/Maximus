@@ -14,7 +14,7 @@ angular.module('maximalistApp')
       },
 
       getItem: function(sku) {
-        console.log(sku);
+        
         // Dummy object for now
         var item = {
           sku: sku,

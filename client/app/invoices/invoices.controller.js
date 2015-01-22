@@ -1,11 +1,25 @@
 'use strict';
 
 angular.module('maximalistApp')
-  .controller('InvoicesCtrl', function($scope, Modal, Item) {
+  .controller('InvoicesCtrl', function($scope, $state, $stateParams, Modal, Item, Invoice) {
     // Current item being saved/looked up/edited
     $scope.currentItem = {
       item: ''
     };
+
+    // All invoices
+    $scope.invoices = Invoice.query();
+
+    $scope.invoice = {
+      items: []
+    };
+
+    // Invoice loaded by param
+    if ($stateParams.id) {
+      $scope.invoice = Invoice.get({
+        id: $stateParams.id
+      });
+    }
 
     // Item database for autocomplete
     $scope.skuNumbers = [{
@@ -14,17 +28,6 @@ angular.module('maximalistApp')
     }, {
       sku: '22222',
       name: 'something else'
-    }];
-
-    // Current invoice state
-    $scope.invoice = [{
-      plan: 3,
-      arb: 1,
-      sku: 344443
-    }, {
-      plan: 4,
-      arb: 3,
-      sku: 112030
     }];
 
     // On SKU autocompleted and selected
@@ -40,12 +43,12 @@ angular.module('maximalistApp')
     };
 
     var saveItemToInvoice = function() {
-      $scope.invoice.push($scope.currentItem.item);
+      $scope.invoice.items.push($scope.currentItem.item);
     };
 
 
     $scope.edit = function(item) {
-      $scope.currentItem.item = item
+      $scope.currentItem.item = item;
       console.log('item to edit', item);
       var saveItemModal = Modal.confirm.save(null, null, $scope.currentItem);
       saveItemModal();
@@ -53,10 +56,25 @@ angular.module('maximalistApp')
 
     $scope.delete = function(item) {
       _.each($scope.invoice, function(invoiceItem, index) {
-        if (invoiceItem.sku == item.sku) {
+        if (invoiceItem.sku === item.sku) {
           $scope.invoice.splice(index, 1);
           return false;
         }
       });
-    }
+    };
+
+    $scope.deleteInvoice = function(id) {
+      var confirmDeleteModal = Modal.confirm.delete(function() {
+        Invoice.delete({ id: id });
+        $scope.invoices = Invoice.query();
+      });
+
+      confirmDeleteModal("this invoice");
+    };
+
+    $scope.saveInvoice = function() {
+      console.log('saving invoice...', $scope.invoice);
+      var invoice = new Invoice($scope.invoice);
+      invoice.$save();
+    };
   });

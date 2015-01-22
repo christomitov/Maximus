@@ -8,14 +8,14 @@
       <div class="form-group">
         <label class="col-lg-4 control-label">PO</label>
         <div class="col-lg-6">
-          <input id="po" type="text" class="form-control" autofocus placeholder="Enter PO #" />
+          <input id="po" type="text" class="form-control" ng-model="invoice.po" autofocus placeholder="Enter PO #" />
         </div>
       </div>
       <br>
       <div class="form-group">
         <label class="col-lg-4 control-label">Network</label>
         <div class="col-lg-6">
-          <input type="text" class="form-control" placeholder="Enter Network ID" />
+          <input type="text" class="form-control" ng-model="invoice.network" placeholder="Enter Network ID" />
         </div>
       </div>
     </div>
@@ -23,14 +23,14 @@
       <div class="form-group">
         <label class="col-lg-6 control-label">Contract / Quote #</label>
         <div class="col-lg-6">
-          <input type="text" class="form-control" placeholder="Enter Contract/Quote #" />
+          <input type="text" class="form-control" ng-model="invoice.contract" placeholder="Enter Contract/Quote #" />
         </div>
       </div>
       <br>
       <div class="form-group">
         <label class="col-lg-6 control-label">Location</label>
         <div class="col-lg-6">
-          <input type="text" class="form-control" placeholder="Enter Location" />
+          <input type="text" class="form-control" ng-model="invoice.location" placeholder="Enter Location" />
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
     <!--<input auto-complete ui-items="codes" ng-model="selected" ng-keypress="loadItemModal($event)" id="sku" type="text" class="form-control" placeholder="Lookup a SKU" autocomplete="off" />-->
   </div>
   <br/>
-  <div id="invoice" ng-show="invoice.length > 0">
+  <div id="invoiceItems" ng-show="invoice.items.length > 0">
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="sheetItemRow" id="_id" ng-repeat="item in invoice">
+        <tr class="sheetItemRow" id="_id" ng-repeat="item in invoice.items">
           <td>{{item.plan}}</td>
           <td>{{item.arb}}</td>
           <td class="sku">{{item.sku}}</td>
@@ -78,7 +78,7 @@
       </tbody>
     </table>
     <div id="saveCancelButtons">
-      <button class="btn btn-primary btn-lg">Save</button>
+      <button class="btn btn-primary btn-lg" ng-click="saveInvoice()">Save</button>
       <button id="cancel" class="btn btn-danger btn-lg">Cancel</button>
     </div>
   </div>
