@@ -3,6 +3,10 @@
 var _ = require('lodash');
 var Invoice = require('./invoice.model');
 
+exports.upload = function(req, res) {
+  // TODO: Upload function for invoice documents
+}
+
 // Get list of invoices
 exports.index = function(req, res) {
   Invoice.find(function (err, invoices) {

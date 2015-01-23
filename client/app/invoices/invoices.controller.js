@@ -1,19 +1,25 @@
 'use strict';
 
 angular.module('maximalistApp')
-  .controller('InvoicesCtrl', function($scope, $state, $stateParams, Modal, Item, Invoice) {
+  .controller('InvoicesCtrl', function($scope, $state, $stateParams, Modal, Item, Invoice, FileUploader) {
+    var uploader = $scope.uploader = new FileUploader({
+      url: '/api/invoices/upload'
+    });
+
     // Current item being saved/looked up/edited
     $scope.currentItem = {
       item: ''
     };
 
-    // All invoices
-    $scope.invoices = Invoice.query();
-
     // Empty Invoice
     $scope.invoice = {
       items: []
     };
+
+    // TODO: maybe use a promise, have empty Invoice than populate
+
+    // All invoices
+    $scope.invoices = Invoice.query();
 
     // Invoice loaded by param
     if ($stateParams.id) {
