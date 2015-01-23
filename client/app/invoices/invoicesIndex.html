@@ -2,8 +2,8 @@
   <h1 class="page-header">Portal Sheets
     <small>Portal Sheets Management</small>
     <div class="pull-right">
-      <a ui-sref="main.createInvoice" class="btn btn-lg btn-primary">Create New Sheet</a>
-      <a href="#" class="btn btn-lg btn-primary">View Analytics</a>
+      <a ui-sref="main.createInvoice" class="btn btn-lg btn-primary"><i class="fa fa-fw fa-file-text-o"></i>Create New Sheet</a>
+      <a href="#" class="btn btn-lg btn-primary"><i class="fa fa-bar-chart"></i> View Analytics</a>
     </div>
   </h1>
 </div>
@@ -13,7 +13,7 @@
   </div>
   <div ng-show="invoices.length > 0">
     <div class="input-group input-group-lg">
-      <span class="input-group-addon">Search</span>
+      <span class="input-group-addon"><i class="fa fa-search"></i></span>
       <input id="sku" type="text" class="form-control typeahead" placeholder="Search Portal Sheets" data-source="sku" autocomplete="off" />
     </div>
     <br/>
