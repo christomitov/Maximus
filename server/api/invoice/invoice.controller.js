@@ -35,6 +35,7 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!invoice) { return res.send(404); }
     var updated = _.merge(invoice, req.body);
+    updated.markModified('items');
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, invoice);

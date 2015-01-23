@@ -30,12 +30,11 @@ angular.module('maximalistApp')
 
       // TODO: Fetch the item from the database via SKU, this is slow.
       $scope.items.forEach(function(item, index) {
-        if(item.sku === selected.originalObject.sku) {
+        if (item.sku === selected.originalObject.sku) {
           $scope.currentItem.item = item;
         }
       });
-      //$scope.currentItem.item = Item.getItem(selected.title);
-      console.log('current item is...', $scope.currentItem);
+
       // Load the modal with this item
       var saveItemModal = Modal.confirm.save(saveItemToInvoice, null, $scope.currentItem);
       // Render the modal
@@ -45,9 +44,43 @@ angular.module('maximalistApp')
     };
 
     var saveItemToInvoice = function() {
+      switch ($scope.currentItem.item.unit) {
+        case 'CUBIC METRE':
+          $scope.currentItem.item.priceQty = $scope.currentItem.item.l * $scope.currentItem.item.w * $scope.currentItem.item.h * $scope.currentItem.item.unitPrice;
+          break;
+        case 'SQUARE METRE':
+          $scope.currentItem.item.priceQty = $scope.currentItem.item.l * $scope.currentItem.item.w * $scope.currentItem.item.unitPrice;
+          break;
+        case 'METRE':
+          $scope.currentItem.item.priceQty = $scope.currentItem.item.l * $scope.currentItem.item.unitPrice;
+          break;
+        case 'EACH':
+          $scope.currentItem.item.priceQty = $scope.currentItem.item.quantity * $scope.currentItem.item.unitPrice;
+          break;
+        case 'HOURLY':
+          $scope.currentItem.item.priceQty = $scope.currentItem.item.hourly * $scope.currentItem.item.unitPrice;
+          break;
+        case 'PERCENTAGE':
+          $scope.currentItem.item.priceQty = $scope.currentItem.item.percentage * $scope.currentItem.item.unitPrice;
+          break;
+        default:
+          break;
+      }
       $scope.invoice.items.push($scope.currentItem.item);
     };
 
+    $scope.getInvoiceTotal = function() {
+      var total = 0;
+      //console.log($scope.invoice.items.length);
+      if ($scope.invoice.items) {
+        for (var i = 0; i < $scope.invoice.items.length; i++) {
+          var item = $scope.invoice.items[i];
+          total += (item.priceQty);
+        }
+      }
+
+      return total;
+    }
 
     $scope.editItem = function(item) {
       $scope.currentItem.item = item;
@@ -55,6 +88,10 @@ angular.module('maximalistApp')
       var saveItemModal = Modal.confirm.save(null, null, $scope.currentItem);
       saveItemModal();
     };
+
+    $scope.updatePrice = function() {
+      console.log($scope.currentItem);
+    }
 
     $scope.deleteItem = function(item) {
       _.each($scope.invoice.items, function(invoiceItem, index) {
@@ -67,7 +104,9 @@ angular.module('maximalistApp')
 
     $scope.deleteInvoice = function(id) {
       var confirmDeleteModal = Modal.confirm.delete(function() {
-        Invoice.delete({ id: id });
+        Invoice.delete({
+          id: id
+        });
         $scope.invoices = Invoice.query();
       });
 
@@ -76,7 +115,11 @@ angular.module('maximalistApp')
 
     $scope.saveInvoice = function() {
       console.log('saving invoice...', $scope.invoice);
-      var invoice = new Invoice($scope.invoice);
-      invoice.$save();
+      if($scope.invoice._id) {
+        $scope.invoice.$update();
+      } else {
+        var invoice = new Invoice($scope.invoice);
+        invoice.$save();
+      }
     };
   });

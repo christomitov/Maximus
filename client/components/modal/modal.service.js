@@ -92,7 +92,7 @@ angular.module('maximalistApp')
             var args = Array.prototype.slice.call(arguments),
               name = args.shift(),
               deleteModal;
-      
+
             deleteModal = openModal({
               modal: {
                 dismissable: true,
