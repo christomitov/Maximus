@@ -1,0 +1,14 @@
+<div class="col-lg-12">
+  <h1 class="page-header">Upload
+    <small>Documents Upload</small>
+    <div class="pull-right">
+    <!-- <a ui-sref="main.uploadDocuments" type="button" class="btn btn-primary btn-lg"><i class="fa fa-upload"></i> Upload Documents</a> -->
+    <a ui-sref="main.editInvoice" type="button" class="btn btn-lg"><i class="fa fa-fw fa-arrow-left"></i> Back</a>
+    </div>
+  </h1>
+
+  <input type="file" nv-file-select="" uploader="uploader" />
+  <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+    <span class="glyphicon glyphicon-upload"></span> Import
+  </button>
+</div>
