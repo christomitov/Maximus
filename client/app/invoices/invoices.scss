@@ -1,0 +1,25 @@
+div#invoice-create {
+  .angucomplete-dropdown {
+    width: 500px;
+  }
+  .input-group-addon.input-label {
+    width: 200px !important;
+    text-align: left;
+  }
+  h3 {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .drop-zone.nv-file-over {
+    border-color: red;
+  }
+  .drop-zone {
+    padding: 50px;
+    border: 3px dotted lightgray;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .ng-invalid-required {
+    border-color: red;
+  }
+}

@@ -30,10 +30,10 @@ exports.import = function(req, res) {
     lines.forEach(function(line) {
       var fields = line.split("~");
       if (fields.length > 1 && fields[0].length <= 8) {
-        if (typeof fields[4] != 'undefined') {
+        if (fields[4] !== undefined) {
           fields[4] = getProperty(unitMap, fields[4].replace(/[\.]/g, "").toUpperCase());
         }
-        if (fields[5] != undefined) {
+        if (fields[5] !== undefined) {
           fields[5] = fields[5].replace(/[\$]/g, "").trim();
         }
         var item = {

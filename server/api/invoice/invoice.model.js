@@ -1,16 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-
-var InvoiceSchema = new Schema({
-  status: String,
-  location: String,
-  po: Number,
-  network: Number,
-  contract: Number,
-  items: [InvoiceItem]
-});
+  Schema = mongoose.Schema;
 
 var InvoiceItem = new Schema({
   plan: Number,
@@ -20,6 +11,15 @@ var InvoiceItem = new Schema({
   unit: String,
   priceQty: Number,
   comments: String
+});
+
+var InvoiceSchema = new Schema({
+  status: String,
+  location: String,
+  po: Number,
+  network: Number,
+  contract: Number,
+  items: [InvoiceItem]
 });
 
 module.exports = mongoose.model('Invoice', InvoiceSchema);

@@ -2,7 +2,10 @@
 
 angular.module('maximalistApp')
   .controller('SettingsCtrl', function($scope, FileUploader) {
-    var uploader = $scope.uploader = new FileUploader({
-      url: '/api/items/import'
+    $scope.uploader = new FileUploader({
+      url: '/api/items/import',
+      autoUpload: true
     });
+
+
   });

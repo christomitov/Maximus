@@ -35,7 +35,7 @@ angular.module('maximalistApp')
     $scope.itemSelected = function(selected) {
 
       // TODO: Fetch the item from the database via SKU, this is slow.
-      $scope.items.forEach(function(item, index) {
+      $scope.items.forEach(function(item) {
         if (item.sku === selected.originalObject.sku) {
           $scope.currentItem.item = item;
         }
@@ -86,7 +86,7 @@ angular.module('maximalistApp')
       }
 
       return total;
-    }
+    };
 
     $scope.editItem = function(item) {
       $scope.currentItem.item = item;
@@ -94,10 +94,6 @@ angular.module('maximalistApp')
       var saveItemModal = Modal.confirm.save(null, null, $scope.currentItem);
       saveItemModal();
     };
-
-    $scope.updatePrice = function() {
-      console.log($scope.currentItem);
-    }
 
     $scope.deleteItem = function(item) {
       _.each($scope.invoice.items, function(invoiceItem, index) {
@@ -113,17 +109,19 @@ angular.module('maximalistApp')
         Invoice.delete({
           id: id
         });
-        $scope.invoices = Invoice.query();
+
+        _.remove($scope.invoices, function(invoice) {
+          return invoice._id == id;
+        });
+
       });
 
-      confirmDeleteModal("this invoice");
+      confirmDeleteModal('this invoice');
     };
 
     $scope.saveInvoice = function() {
-      console.log('saving invoice...', $scope.invoice);
-
       if ($scope.invoice._id) {
-        appendIdAndUpload($scope.invoice_id, uploader);
+        appendIdAndUpload($scope.invoice._id, uploader);
         $scope.invoice.$update();
       } else {
         var invoice = new Invoice($scope.invoice);
@@ -131,14 +129,15 @@ angular.module('maximalistApp')
           appendIdAndUpload(invoice._id, uploader);
         });
       }
+      //var myAlert = $alert({title: 'Holy guacamole!', content: 'Best check yo self, you\'re not looking too good.', placement: 'top', type: 'info', show: true});
     };
 
     var appendIdAndUpload = function(id, uploader) {
-      uploader.queue.forEach(function(file, index) {
+      uploader.queue.forEach(function(file) {
         file.url += id;
       });
 
       // Upload after
       uploader.uploadAll();
-    }
+    };
   });

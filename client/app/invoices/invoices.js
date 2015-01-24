@@ -17,10 +17,5 @@ angular.module('maximalistApp')
         url: '/invoices/edit/:id',
         templateUrl: 'app/invoices/invoicesCreate.html',
         controller: 'InvoicesCtrl'
-      })
-      .state('main.uploadDocuments', {
-        url: '/invoices/upload',
-        templateUrl: 'app/invoices/invoicesUpload.html',
-        controller: 'InvoicesCtrl'
       });
   });
