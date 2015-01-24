@@ -2,6 +2,17 @@
 
 angular.module('maximalistApp')
   .controller('MainCtrl', function ($scope, $http) {
+
+    $scope.alerts = new Array();
+
+    $scope.addAlert = function(type, message) {
+      $scope.alerts.push({type: type, msg: message});
+    };
+
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
+
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
