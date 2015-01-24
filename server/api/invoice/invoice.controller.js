@@ -5,6 +5,8 @@ var Invoice = require('./invoice.model');
 
 exports.upload = function(req, res) {
   // TODO: Upload function for invoice documents
+  console.log(req.files);
+  return res.send(200);
 }
 
 // Get list of invoices

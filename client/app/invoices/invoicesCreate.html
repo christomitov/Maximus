@@ -11,10 +11,19 @@
     padding: 0px !important;
     margin: 0px !important;
   }
+  .drop-zone.nv-file-over {
+    border-color: red;
+  }
+  .drop-zone {
+    padding: 50px;
+    border: 3px dotted lightgray;
+    border-radius: 10px;
+    text-align: center;
+  }
 </style>
 <!-- SERIOUSLY -->
 
-<div class="col-lg-12">
+<div class="col-lg-12" nv-file-drop="" uploader="uploader">
   <h1 class="page-header">Portal Sheets
       <small>New Portal Sheet</small>
       <div class="pull-right">
@@ -47,9 +56,21 @@
           <input type="text" class="form-control" ng-model="invoice.location" placeholder="Enter Location" />
         </div>
       </div>
-      <div class="col-lg-6 well" style="border: 3px dotted lightgray; border-radius:10px; text-align:center;">
-        <h4 style="margin: 0 auto; padding:50px;">Drag and Drop Documents here</h4>
+      <div class="col-lg-6">
+        <div class="well drop-zone" nv-file-over="" uploader="uploader" >
+          <h4>Drag and Drop Documents here</h4>
+        </div>
+
+        <input type="file" nv-file-select="" uploader="uploader" multiple />
+
+        <ul ng-show="uploader.queue.length > 0">
+          <li ng-repeat="item in uploader.queue">
+            {{item.file.name}}
+            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+          </li>
+        </ul>
       </div>
+
     </div>
   </div>
   <br/>

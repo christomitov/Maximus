@@ -27,12 +27,7 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  app.use(multer({
-    dest: './uploads/',
-    rename: function(fieldname, filename) {
-      return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
-    }
-  }));
+  app.use(multer());
 
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
