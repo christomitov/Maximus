@@ -1,0 +1,29 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'remove',
+1 verbose cli   'node-zip',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node_modules/node-zip unbuild
+5 info preuninstall node-zip@1.1.0
+6 info uninstall node-zip@1.1.0
+7 verbose true,/Users/christo/Work/Maximalist/node_modules,/Users/christo/Work/Maximalist/node_modules unbuild node-zip@1.1.0
+8 verbose /Users/christo/Work/Maximalist/node_modules/.bin,[object Object] binRoot
+9 error Error: EACCES, unlink '/Users/christo/Work/Maximalist/node_modules/.bin/nodezip'
+9 error  { [Error: EACCES, unlink '/Users/christo/Work/Maximalist/node_modules/.bin/nodezip']
+9 error   errno: 3,
+9 error   code: 'EACCES',
+9 error   path: '/Users/christo/Work/Maximalist/node_modules/.bin/nodezip' }
+10 error Please try running this command again as root/Administrator.
+11 error System Darwin 14.1.0
+12 error command "/usr/local/bin/node" "/usr/local/bin/npm" "remove" "node-zip" "--save"
+13 error cwd /Users/christo/Work/Maximalist
+14 error node -v v0.10.33
+15 error npm -v 1.4.28
+16 error path /Users/christo/Work/Maximalist/node_modules/.bin/nodezip
+17 error code EACCES
+18 error errno 3
+19 error stack Error: EACCES, unlink '/Users/christo/Work/Maximalist/node_modules/.bin/nodezip'
+20 verbose exit [ 3, true ]

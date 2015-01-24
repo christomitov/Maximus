@@ -2,10 +2,26 @@
 
 var _ = require('lodash');
 var Invoice = require('./invoice.model');
+var JSZip = require("jszip");
+var fs = require('fs');
 
 exports.upload = function(req, res) {
   // TODO: Upload function for invoice documents
+  console.log(req.params);
+
+
+  if (fs.existsSync('/uploads/' + req.params.id + '.zip')) {
+    // Delete that
+  }
+
+  var zip = new JSZip();
   console.log(req.files);
+  //zip.file(file.originalname, )
+  // req.files.forEach(function(file, index) {
+  //   console.log(file);
+  //   //zip.file()
+  // });
+
   return res.send(200);
 }
 

@@ -3,8 +3,7 @@
 angular.module('maximalistApp')
   .controller('InvoicesCtrl', function($scope, $state, $stateParams, Modal, Item, Invoice, FileUploader) {
     var uploader = $scope.uploader = new FileUploader({
-      url: '/api/invoices/upload',
-      autoUpload: true
+      url: '/api/invoices/upload/'
     });
 
     // Current item being saved/looked up/edited
@@ -123,17 +122,23 @@ angular.module('maximalistApp')
     $scope.saveInvoice = function() {
       console.log('saving invoice...', $scope.invoice);
 
-      uploader.queue.forEach(function(fileItem, index) {
-        console.log(fileItem);
-      });
-
-      uploader.uploadAll();
-
-      if($scope.invoice._id) {
+      if ($scope.invoice._id) {
+        appendIdAndUpload($scope.invoice_id, uploader);
         $scope.invoice.$update();
       } else {
         var invoice = new Invoice($scope.invoice);
-        invoice.$save();
+        invoice.$save(function() {
+          appendIdAndUpload(invoice._id, uploader);
+        });
       }
     };
+
+    var appendIdAndUpload = function(id, uploader) {
+      uploader.queue.forEach(function(file, index) {
+        file.url += id;
+      });
+
+      // Upload after
+      uploader.uploadAll();
+    }
   });
