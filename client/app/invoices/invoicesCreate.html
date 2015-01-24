@@ -1,8 +1,16 @@
 <!-- THIS IS BAD IT NEEDS TO BE MOVED OUT INTO A SASS FILE -->
 <style>
-.angucomplete-dropdown {
-  width:500px;
-}
+  .angucomplete-dropdown {
+    width: 500px;
+  }
+  .input-group-addon.input-label {
+    width: 200px !important;
+    text-align: left;
+  }
+  h3 {
+    padding: 0px !important;
+    margin: 0px !important;
+  }
 </style>
 <!-- SERIOUSLY -->
 
@@ -10,87 +18,92 @@
   <h1 class="page-header">Portal Sheets
       <small>New Portal Sheet</small>
       <div class="pull-right">
-        <a ui-sref="main.uploadDocuments" type="button" class="btn btn-primary btn-lg"><i class="fa fa-upload"></i> Upload Documents</a>
         <a ui-sref="main.invoices" type="button" class="btn btn-lg"><i class="fa fa-fw fa-arrow-left"></i> Back</a>
       </div>
     </h1>
-  <div id="sheetInputs" class="row">
-    <div class="col-lg-6">
-      <div class="form-group">
-        <label class="col-lg-4 control-label">PO</label>
-        <div class="col-lg-6">
+  <div id="sheetInputs" class="row panel panel-primary">
+    <div class="panel-heading">
+      <h3>Invoice Details</h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon input-label">PO</span>
           <input id="po" type="text" class="form-control" ng-model="invoice.po" autofocus placeholder="Enter PO #" />
         </div>
-      </div>
-      <br>
-      <div class="form-group">
-        <label class="col-lg-4 control-label">Network</label>
-        <div class="col-lg-6">
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon input-label">Network</span>
           <input type="text" class="form-control" ng-model="invoice.network" placeholder="Enter Network ID" />
         </div>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="form-group">
-        <label class="col-lg-6 control-label">Contract / Quote #</label>
-        <div class="col-lg-6">
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon input-label">Contract / Quote #</span>
           <input type="text" class="form-control" ng-model="invoice.contract" placeholder="Enter Contract/Quote #" />
         </div>
-      </div>
-      <br>
-      <div class="form-group">
-        <label class="col-lg-6 control-label">Location</label>
-        <div class="col-lg-6">
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon input-label">Location</span>
           <input type="text" class="form-control" ng-model="invoice.location" placeholder="Enter Location" />
         </div>
       </div>
+      <div class="col-lg-6 well" style="border: 3px dotted lightgray; border-radius:10px; text-align:center;">
+        <h4 style="margin: 0 auto; padding:50px;">Drag and Drop Documents here</h4>
+      </div>
     </div>
   </div>
   <br/>
-  <div class="input-group input-group-lg">
-    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-    <angucomplete-alt id="sku" placeholder="Enter Item SKU" pause="100" selected-object="itemSelected" local-data="items" search-fields="name" title-field="name" minlength="1" input-class="form-control" />
-    <!--<input auto-complete ui-items="codes" ng-model="selected" ng-keypress="loadItemModal($event)" id="sku" type="text" class="form-control" placeholder="Lookup a SKU" autocomplete="off" />-->
-  </div>
-  <br/>
-  <div id="invoiceItems" ng-show="invoice.items.length > 0">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Plan</th>
-          <th>Arb</th>
-          <th>Orig Sku</th>
-          <th>Desc. of Current SKU</th>
-          <th>UoM</th>
-          <th>Pln Qty</th>
-          <th>Comments to Vendor</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="sheetItemRow" id="_id" ng-repeat="item in invoice.items">
-          <td>{{item.plan}}</td>
-          <td>{{item.arb}}</td>
-          <td class="sku">{{item.sku}}</td>
-          <td>{{item.title}}</td>
-          <td>{{item.unit}}</td>
-          <td>{{item.priceQty | currency}}</td>
-          <td>{{item.comments}}</td>
-          <td style="width:90px;">
-            <a href="#" ng-click="deleteItem(item)" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
-            <a href="#" ng-click="editItem(item)" id="edit" class="pull-right"><i class="fa fa-fw fa-pencil fa-2x"></i></a>
-          </td>
-        </tr>
+  <div class="row panel panel-primary">
+    <div class="panel-heading">
+      <h3>Invoice Items</h3>
+    </div>
+    <div class="panel-body">
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <angucomplete-alt id="sku" placeholder="Enter Item SKU" pause="100" selected-object="itemSelected" local-data="items" search-fields="name" title-field="name" minlength="1" input-class="form-control" />
+        <!--<input auto-complete ui-items="codes" ng-model="selected" ng-keypress="loadItemModal($event)" id="sku" type="text" class="form-control" placeholder="Lookup a SKU" autocomplete="off" />-->
+      </div>
+      <br/>
+      <div id="invoiceItems" ng-show="invoice.items.length > 0">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Arb</th>
+              <th>Orig Sku</th>
+              <th>Desc. of Current SKU</th>
+              <th>UoM</th>
+              <th>Pln Qty</th>
+              <th>Comments to Vendor</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="sheetItemRow" id="_id" ng-repeat="item in invoice.items">
+              <td>{{item.plan}}</td>
+              <td>{{item.arb}}</td>
+              <td class="sku">{{item.sku}}</td>
+              <td>{{item.title}}</td>
+              <td>{{item.unit}}</td>
+              <td>{{item.priceQty | currency}}</td>
+              <td>{{item.comments}}</td>
+              <td style="width:90px;">
+                <a href="#" ng-click="deleteItem(item)" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
+                <a href="#" ng-click="editItem(item)" id="edit" class="pull-right"><i class="fa fa-fw fa-pencil fa-2x"></i></a>
+              </td>
+            </tr>
 
-        <tr>
-          <td>TOTAL</td>
-          <td colspan="5" class="text-right">{{ getInvoiceTotal() | currency}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div id="saveCancelButtons">
-      <button class="btn btn-primary btn-lg" ng-click="saveInvoice()"><i class="fa fa-floppy-o"></i> Save</button>
-      <button id="cancel" ui-sref="main.invoices" class="btn btn-danger btn-lg"><i class="fa fa-times"></i> Discard Changes</button>
+            <tr>
+              <td>TOTAL</td>
+              <td colspan="5" class="text-right">{{ getInvoiceTotal() | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="saveCancelButtons">
+          <button class="btn btn-primary btn-lg" ng-click="saveInvoice()"><i class="fa fa-floppy-o"></i> Save</button>
+          <button id="cancel" ui-sref="main.invoices" class="btn btn-danger btn-lg"><i class="fa fa-times"></i> Discard Changes</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
