@@ -91,7 +91,7 @@
               <td>{{item.priceQty | currency}}</td>
               <td>{{item.comments}}</td>
               <td style="width:90px;">
-                <a href="#" ng-click="deleteItem(item)" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
+                <a href="#" ng-click="deleteItem($index)" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
                 <a href="#" ng-click="editItem(item)" id="edit" class="pull-right"><i class="fa fa-fw fa-pencil fa-2x"></i></a>
               </td>
             </tr>

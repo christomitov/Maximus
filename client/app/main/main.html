@@ -134,8 +134,8 @@
     </div>
     <!-- /.navbar-collapse -->
   </nav>
-
-  <alert class="flash-message" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  <!-- Alert messages -->
+  <alert class="flash-message" ng-animate="'animate'" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
   <div id="page-wrapper">
     <div class="container-fluid">

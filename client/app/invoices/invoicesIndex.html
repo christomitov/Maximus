@@ -34,7 +34,7 @@
           <td>{{invoice.contract}}</td>
           <td>{{invoice.location}}</td>
           <td style="width:90px;">
-            <a href="#" ng-click="deleteInvoice(invoice._id)" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
+            <a href="#" ng-click="deleteInvoice(invoice._id, $index)" id="delete" class="pull-right"><i class="fa fa-fw fa-remove fa-2x"></i></a>
             <a href="#" ui-sref="main.editInvoice({ id: invoice._id })" id="edit" class="pull-right"><i class="fa fa-fw fa-pencil fa-2x"></i></a>
           </td>
         </tr>

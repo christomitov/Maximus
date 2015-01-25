@@ -90,29 +90,21 @@ angular.module('maximalistApp')
 
       $scope.editItem = function(item) {
         $scope.currentItem.item = item;
-        console.log('item to edit', item);
         var saveItemModal = Modal.confirm.save(null, null, $scope.currentItem);
         saveItemModal();
       };
 
-      $scope.deleteItem = function(item) {
-        _.each($scope.invoice.items, function(invoiceItem, index) {
-          if (invoiceItem.sku === item.sku) {
-            $scope.invoice.items.splice(index, 1);
-            return false;
-          }
-        });
+      $scope.deleteItem = function(index) {
+        $scope.invoice.items.splice(index, 1);
       };
 
-      $scope.deleteInvoice = function(id) {
+      $scope.deleteInvoice = function(id, index) {
         var confirmDeleteModal = Modal.confirm.delete(function() {
           Invoice.delete({
             id: id
           });
 
-          _.remove($scope.invoices, function(invoice) {
-            return invoice._id === id;
-          });
+          $scope.invoices.splice(index, 1);
 
         });
 
