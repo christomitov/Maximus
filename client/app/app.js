@@ -21,10 +21,10 @@ angular.module('maximalistApp', [
       enter : function(element, done) {
         element.css('opacity',1);
         $timeout(function() {
-          jQuery(element).animate({opacity: 0}, 500, function() {
+          jQuery(element).animate({opacity: 0}, 1000, function() {
             element.remove();
           });
-        },3000);
+        },2000);
 
 
         // optional onDone or onCancel callback
