@@ -4,9 +4,14 @@
   width: 100%;
   position: relative;
   z-index: 9999;
-
+  text-align:center;
+  padding-left:50px;
+  font-size:30px;
 }
 
+#side-menu {
+  font-size:16px;
+}
 
 .fade-hide, .fade-show {
   -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;

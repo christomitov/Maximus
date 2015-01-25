@@ -22,28 +22,28 @@
     </div>
 
     <div id="unitInputs">
-      <div ng-if="item.unit == 'CUBIC'">
+      <div ng-if="item.unit == 'CUBIC METRE'">
         <label>Enter cubic dimensions</label>
         <div class="input-group">
-          <input id="length" type="number" ng-model="item.length" class="form-control" placeholder="Enter length">
+          <input id="length" type="number" ng-model="item.l" class="form-control" placeholder="Enter length">
           <div class="input-group-addon">x</div>
-          <input id="width" type="number" ng-model="item.width" class="form-control" placeholder="Enter width">
+          <input id="width" type="number" ng-model="item.w" class="form-control" placeholder="Enter width">
           <div class="input-group-addon">x</div>
-          <input id="height" type="number" ng-model="item.height" class="form-control" placeholder="Enter height">
+          <input id="height" type="number" ng-model="item.h" class="form-control" placeholder="Enter height">
         </div>
       </div>
-      <div ng-if="item.unit == 'SQUARED'">
+      <div ng-if="item.unit == 'SQUARE METRE'">
         <label>Enter cubic dimensions</label>
         <div class="input-group">
-          <input id="length" type="number" ng-model="item.length" class="form-control" placeholder="Enter length">
+          <input id="length" type="number" ng-model="item.l" class="form-control" placeholder="Enter length">
           <div class="input-group-addon">x</div>
-          <input id="width" type="number" ng-model="item.width" class="form-control" placeholder="Enter width">
+          <input id="width" type="number" ng-model="item.w" class="form-control" placeholder="Enter width">
         </div>
       </div>
       <div ng-if="item.unit == 'METRE'">
         <label>Enter Length</label>
         <div class="input-group">
-          <input id="length" type="number" ng-model="item.length" class="form-control" placeholder="Enter length">
+          <input id="length" type="number" ng-model="item.l" class="form-control" placeholder="Enter length">
         </div>
       </div>
       <div ng-if="item.unit == 'EACH'">
@@ -58,7 +58,7 @@
           <input id="hours" type="number" ng-model="item.hours" class="form-control" placeholder="# of Hours">
         </div>
       </div>
-      <div ng-if="item.unit == 'PERCENT'">
+      <div ng-if="item.unit == 'PERCENTAGE'">
         <label>Enter Percentage</label>
         <div class="input-group">
           <input id="percentage" type="number" ng-model="item.percentage" class="form-control" placeholder="Enter %">

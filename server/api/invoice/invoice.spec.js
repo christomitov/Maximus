@@ -18,3 +18,7 @@ describe('GET /api/invoices', function() {
       });
   });
 });
+
+describe('POST /api/invoices', function() {
+  //it('should ')
+});

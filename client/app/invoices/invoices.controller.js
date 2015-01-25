@@ -111,7 +111,7 @@ angular.module('maximalistApp')
           });
 
           _.remove($scope.invoices, function(invoice) {
-            return invoice._id == id;
+            return invoice._id === id;
           });
 
         });
