@@ -18,7 +18,7 @@ angular.module('maximalistApp', [
   })
   .animation('.flash-message', function($timeout) {
     return {
-      enter : function(element, done) {
+      enter : function(element) {
         element.css('opacity',1);
         $timeout(function() {
           jQuery(element).animate({opacity: 0}, 1000, function() {
@@ -34,7 +34,7 @@ angular.module('maximalistApp', [
           if(isCancelled) {
             jQuery(element).stop();
           }
-        }
+        };
       }
-    }
+    };
   });

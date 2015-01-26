@@ -18,8 +18,17 @@
       <div class="col-lg-6">
         <form name='invoiceForm'>
           <div class="input-group">
+            <span class="input-group-addon input-label">Status</span>
+            <select class="form-control" ng-model="invoice.status">
+              <option value="partial">Partial</option>
+              <option value="finished">Finished</option>
+            </select>
+            <!-- <input id="status" name="status" type="select" class="form-control" ng-model="invoice.status" autofocus placeholder="Enter PO #" required/> -->
+          </div>
+          <br/>
+          <div class="input-group">
             <span class="input-group-addon input-label">PO</span>
-            <input id="po" name="po" type="text" class="form-control" ng-model="invoice.po" autofocus placeholder="Enter PO #" required/>
+            <input id="po" name="po" type="text" class="form-control" ng-model="invoice.po" placeholder="Enter PO #" required/>
           </div>
           <br>
           <div class="input-group">
@@ -34,9 +43,12 @@
           <br>
           <div class="input-group">
             <span class="input-group-addon input-label">Location</span>
-            <input type="text" class="form-control" ng-model="invoice.location" placeholder="Enter Location" required/>
+            <google-places class="form-control" ng-model="invoice.location" required></google-places>
           </div>
+          <br>
+          <a style="margin: 20px 0px 0px 1px;" ng-show="invoice.locationUrl" href="{{invoice.locationUrl}}" target="_blank">View Map</a>
         </form>
+
       </div>
       <div class="col-lg-6">
         <div class="well drop-zone" nv-file-over="" uploader="uploader">
@@ -47,7 +59,7 @@
 
         <ul ng-show="uploader.queue.length > 0">
           <li ng-repeat="item in uploader.queue">
-            {{item.file.name}}
+            <a href="{{item.url}}">{{item.file.name}}</a>
             <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
           </li>
         </ul>

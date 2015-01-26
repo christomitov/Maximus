@@ -16,6 +16,7 @@ var InvoiceItem = new Schema({
 var InvoiceSchema = new Schema({
   status: String,
   location: String,
+  locationUrl: String,
   po: Number,
   network: Number,
   contract: Number,

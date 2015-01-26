@@ -2,8 +2,9 @@
 
 var _ = require('lodash');
 var Invoice = require('./invoice.model');
-var JSZip = require("jszip");
+var JSZip = require('jszip');
 var fs = require('fs');
+var mongoose = require('mongoose')
 
 exports.upload = function(req, res) {
   // TODO: Upload function for invoice documents
@@ -53,15 +54,8 @@ exports.create = function(req, res) {
 // Updates an existing invoice in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Invoice.findById(req.params.id, function (err, invoice) {
-    if (err) { return handleError(res, err); }
-    if(!invoice) { return res.send(404); }
-    var updated = _.merge(invoice, req.body);
-    updated.markModified('items');
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, invoice);
-    });
+  Invoice.findOneAndUpdate({ _id: req.params.id }, req.body, function(err, invoice) {
+    return res.json(200, invoice);
   });
 };
 

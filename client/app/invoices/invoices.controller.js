@@ -2,8 +2,10 @@
 
 angular.module('maximalistApp')
   .controller('InvoicesCtrl', function($scope, $state, $stateParams, Modal, Item, Invoice, FileUploader) {
+
     var uploader = $scope.uploader = new FileUploader({
-      url: '/api/invoices/upload/'
+      url: '/api/invoices/upload/',
+      autoUpload: true
     });
 
     // Current item being saved/looked up/edited
@@ -13,10 +15,11 @@ angular.module('maximalistApp')
 
     // Empty Invoice
     $scope.invoice = {
-      items: []
+      items: [],
+      locationUrl: ''
     };
 
-    // TODO: maybe use a promise, have empty Invoice than populate
+    // TODO: maybe use a promise, have empty Invoice then populate
 
     // All invoices
     $scope.invoices = Invoice.query();
@@ -33,7 +36,6 @@ angular.module('maximalistApp')
 
     // On SKU autocompleted and selected
     $scope.itemSelected = function(selected) {
-
       // TODO: Fetch the item from the database via SKU, this is slow.
       $scope.items.forEach(function(item) {
         if (item.sku === selected.originalObject.sku) {
@@ -77,7 +79,7 @@ angular.module('maximalistApp')
 
     $scope.getInvoiceTotal = function() {
       var total = 0;
-      //console.log($scope.invoice.items.length);
+
       if ($scope.invoice.items) {
         for (var i = 0; i < $scope.invoice.items.length; i++) {
           var item = $scope.invoice.items[i];
@@ -105,7 +107,6 @@ angular.module('maximalistApp')
         });
 
         $scope.invoices.splice(index, 1);
-
       });
 
       confirmDeleteModal('this invoice');
